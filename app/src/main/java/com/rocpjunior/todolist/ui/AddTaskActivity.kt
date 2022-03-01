@@ -72,6 +72,11 @@ class AddTaskActivity: AppCompatActivity() {
             TaskDataSource.insertTask(task)
             setResult(Activity.RESULT_OK)
             finish()
+
+        }
+
+        binding.toolbar.setOnClickListener {
+            super.onBackPressed()
         }
     }
 
