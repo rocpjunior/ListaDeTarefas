@@ -13,7 +13,7 @@ import com.rocpjunior.todolist.extensions.text
 import com.rocpjunior.todolist.model.Task
 import java.util.*
 
-class AddTaskActivity: AppCompatActivity() {
+class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
 
@@ -51,7 +51,8 @@ class AddTaskActivity: AppCompatActivity() {
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                val minute = if(timePicker.minute in 0..9)  "0${timePicker.minute}" else timePicker.minute
+                val minute =
+                    if (timePicker.minute in 0..9) "0${timePicker.minute}" else timePicker.minute
                 val hour = if (timePicker.hour in 0..9) "0${timePicker.hour}" else timePicker.hour
                 binding.tilHour.text = "$hour:$minute"
             }
@@ -81,6 +82,6 @@ class AddTaskActivity: AppCompatActivity() {
     }
 
     companion object {
-        const val TASK_ID ="task_id"
+        const val TASK_ID = "task_id"
     }
 }

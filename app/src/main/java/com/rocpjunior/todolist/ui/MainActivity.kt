@@ -48,13 +48,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateList() {
         val list = TaskDataSource.getList()
-        binding.imageStatus.emptyState.visibility = if(list.isEmpty()) View.VISIBLE
-         else View.GONE
+        binding.imageStatus.emptyState.visibility = if (list.isEmpty()) View.VISIBLE
+        else View.GONE
 
         adapter.submitList(list)
     }
 
     companion object {
-        private  const val CREATE_NEW_TASK = 1000
+        private const val CREATE_NEW_TASK = 1000
     }
 }
