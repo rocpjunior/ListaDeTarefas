@@ -2,6 +2,7 @@ package com.rocpjunior.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -64,22 +65,26 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         binding.btnNewTask.setOnClickListener {
-            val task = Task(
-                title = binding.tilTitle.text,
-                hour = binding.tilHour.text,
-                date = binding.tilDate.text,
-                id = intent.getIntExtra(TASK_ID, 0)
-            )
-            TaskDataSource.insertTask(task)
-            setResult(Activity.RESULT_OK)
-            finish()
-
+            if (binding.tilTitle.text.isNotEmpty() && binding.tilHour.text.isNotEmpty() && binding.tilDate.text.isNotEmpty()) {
+                val task = Task(
+                    title = binding.tilTitle.text,
+                    hour = binding.tilHour.text,
+                    date = binding.tilDate.text,
+                    id = intent.getIntExtra(TASK_ID, 0)
+                )
+                TaskDataSource.insertTask(task)
+                setResult(Activity.RESULT_OK)
+                finish()
+            } else(
+                Toast.makeText(this, "Preencha todos os campos para criar uma tarefa", Toast.LENGTH_LONG).show()
+                    )
         }
 
         binding.toolbar.setOnClickListener {
             super.onBackPressed()
         }
     }
+
 
     companion object {
         const val TASK_ID = "task_id"

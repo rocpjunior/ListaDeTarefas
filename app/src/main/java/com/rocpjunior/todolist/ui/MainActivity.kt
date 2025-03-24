@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.rocpjunior.todolist.databinding.ActivityMainBinding
 import com.rocpjunior.todolist.datasource.TaskDataSource
 
@@ -33,11 +35,20 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddTaskActivity::class.java)
             intent.putExtra(AddTaskActivity.TASK_ID, it.id)
             startActivityForResult(intent, CREATE_NEW_TASK)
+            updateList()
         }
 
         adapter.listenerDelete = {
-            TaskDataSource.deleteTask(it)
-            updateList()
+            val alertador = AlertDialog.Builder(this)
+            alertador.setTitle("Excluir Tarefa")
+            alertador.setMessage("Deseja excluir essa tarefa?")
+            alertador.setPositiveButton("Sim"){_,_ ->
+                TaskDataSource.deleteTask(it)
+                updateList()
+                Toast.makeText(this, "Tarefa excluída com sucesso",Toast.LENGTH_LONG).show()
+            }
+            alertador.setNegativeButton("Não"){_,_->}
+            alertador.create().show()
         }
     }
 
